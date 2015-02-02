@@ -1,0 +1,5 @@
+panda 2
+coffee 1
+coffee 2
+happy 3
+china 1

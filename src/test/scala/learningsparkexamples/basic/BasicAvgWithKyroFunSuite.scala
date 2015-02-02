@@ -18,5 +18,7 @@ class BasicAvgWithKyroFunSuite extends AbstractSparkFunSuite {
     val result = input.aggregate((0, 0))((x, y) => (x._1 + y, x._2 + 1), (x, y) => (x._1 + y._1, x._2 + y._2))
     val avg = result._1 / result._2.toFloat
     println(s"Avg of List(1,2,3,4) = $avg, result=$result")
+
+    sc.stop()
   }
 }

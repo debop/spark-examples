@@ -1,0 +1,373 @@
+BasicAvgFunSuite:
+15/02/02 16:15:06 INFO spark.SecurityManager: Changing view acls to: debop
+15/02/02 16:15:06 INFO spark.SecurityManager: Changing modify acls to: debop
+15/02/02 16:15:06 INFO spark.SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: Set(debop); users with modify permissions: Set(debop)
+15/02/02 16:15:07 INFO slf4j.Slf4jLogger: Slf4jLogger started
+15/02/02 16:15:07 INFO Remoting: Starting remoting
+15/02/02 16:15:07 INFO Remoting: Remoting started; listening on addresses :[akka.tcp://sparkDriver@192.168.40.244:54645]
+15/02/02 16:15:07 INFO util.Utils: Successfully started service 'sparkDriver' on port 54645.
+15/02/02 16:15:07 INFO spark.SparkEnv: Registering MapOutputTracker
+15/02/02 16:15:07 INFO spark.SparkEnv: Registering BlockManagerMaster
+15/02/02 16:15:07 INFO storage.DiskBlockManager: Created local directory at /var/folders/95/65nsj5yd4236dw707_xnxl340000gn/T/spark-local-20150202161507-99f9
+15/02/02 16:15:07 INFO storage.MemoryStore: MemoryStore started with capacity 983.1 MB
+15/02/02 16:15:08 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+15/02/02 16:15:08 INFO spark.HttpFileServer: HTTP File server directory is /var/folders/95/65nsj5yd4236dw707_xnxl340000gn/T/spark-f0f97abf-f9f1-4871-9e73-e5248042ab8d
+15/02/02 16:15:08 INFO spark.HttpServer: Starting HTTP Server
+15/02/02 16:15:08 INFO server.Server: jetty-8.1.14.v20131031
+15/02/02 16:15:08 INFO server.AbstractConnector: Started SocketConnector@0.0.0.0:54648
+15/02/02 16:15:08 INFO util.Utils: Successfully started service 'HTTP file server' on port 54648.
+15/02/02 16:15:08 INFO server.Server: jetty-8.1.14.v20131031
+15/02/02 16:15:08 WARN component.AbstractLifeCycle: FAILED SelectChannelConnector@0.0.0.0:4040: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:444)
+	at sun.nio.ch.Net.bind(Net.java:436)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.open(SelectChannelConnector.java:187)
+	at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316)
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:265)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:293)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.apache.spark.ui.JettyUtils$.org$apache$spark$ui$JettyUtils$$connect$1(JettyUtils.scala:194)
+	at org.apache.spark.ui.JettyUtils$$anonfun$2.apply(JettyUtils.scala:204)
+	at org.apache.spark.ui.JettyUtils$$anonfun$2.apply(JettyUtils.scala:204)
+	at org.apache.spark.util.Utils$$anonfun$startServiceOnPort$1.apply$mcVI$sp(Utils.scala:1676)
+	at scala.collection.immutable.Range.foreach$mVc$sp(Range.scala:141)
+	at org.apache.spark.util.Utils$.startServiceOnPort(Utils.scala:1667)
+	at org.apache.spark.ui.JettyUtils$.startJettyServer(JettyUtils.scala:204)
+	at org.apache.spark.ui.WebUI.bind(WebUI.scala:102)
+	at org.apache.spark.SparkContext$$anonfun$10.apply(SparkContext.scala:269)
+	at org.apache.spark.SparkContext$$anonfun$10.apply(SparkContext.scala:269)
+	at scala.Option.foreach(Option.scala:236)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:269)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:136)
+	at learningsparkexamples.basic.BasicAvgFunSuite.beforeAll(BasicAvgFunSuite.scala:18)
+	at org.scalatest.BeforeAndAfterAll$class.beforeAll(BeforeAndAfterAll.scala:187)
+	at learningsparkexamples.AbstractSparkFunSuite.beforeAll(AbstractSparkFunSuite.scala:13)
+	at org.scalatest.BeforeAndAfterAll$class.run(BeforeAndAfterAll.scala:253)
+	at learningsparkexamples.AbstractSparkFunSuite.org$scalatest$BeforeAndAfter$$super$run(AbstractSparkFunSuite.scala:13)
+	at org.scalatest.BeforeAndAfter$class.run(BeforeAndAfter.scala:241)
+	at learningsparkexamples.AbstractSparkFunSuite.run(AbstractSparkFunSuite.scala:13)
+	at org.scalatest.Suite$class.callExecuteOnSuite$1(Suite.scala:1492)
+	at org.scalatest.Suite$$anonfun$runNestedSuites$1.apply(Suite.scala:1528)
+	at org.scalatest.Suite$$anonfun$runNestedSuites$1.apply(Suite.scala:1526)
+	at scala.collection.IndexedSeqOptimized$class.foreach(IndexedSeqOptimized.scala:33)
+	at scala.collection.mutable.ArrayOps$ofRef.foreach(ArrayOps.scala:108)
+	at org.scalatest.Suite$class.runNestedSuites(Suite.scala:1526)
+	at org.scalatest.tools.DiscoverySuite.runNestedSuites(DiscoverySuite.scala:29)
+	at org.scalatest.Suite$class.run(Suite.scala:1421)
+	at org.scalatest.tools.DiscoverySuite.run(DiscoverySuite.scala:29)
+	at org.scalatest.tools.SuiteRunner.run(SuiteRunner.scala:55)
+	at org.scalatest.tools.Runner$$anonfun$doRunRunRunDaDoRunRun$3.apply(Runner.scala:2563)
+	at org.scalatest.tools.Runner$$anonfun$doRunRunRunDaDoRunRun$3.apply(Runner.scala:2557)
+	at scala.collection.immutable.List.foreach(List.scala:318)
+	at org.scalatest.tools.Runner$.doRunRunRunDaDoRunRun(Runner.scala:2557)
+	at org.scalatest.tools.Runner$$anonfun$runOptionallyWithPassFailReporter$2.apply(Runner.scala:1044)
+	at org.scalatest.tools.Runner$$anonfun$runOptionallyWithPassFailReporter$2.apply(Runner.scala:1043)
+	at org.scalatest.tools.Runner$.withClassLoaderAndDispatchReporter(Runner.scala:2722)
+	at org.scalatest.tools.Runner$.runOptionallyWithPassFailReporter(Runner.scala:1043)
+	at org.scalatest.tools.Runner$.main(Runner.scala:860)
+	at org.scalatest.tools.Runner.main(Runner.scala)
+15/02/02 16:15:08 WARN component.AbstractLifeCycle: FAILED org.eclipse.jetty.server.Server@522d0fb: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:444)
+	at sun.nio.ch.Net.bind(Net.java:436)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.open(SelectChannelConnector.java:187)
+	at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316)
+	at org.eclipse.jetty.server.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:265)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:293)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.apache.spark.ui.JettyUtils$.org$apache$spark$ui$JettyUtils$$connect$1(JettyUtils.scala:194)
+	at org.apache.spark.ui.JettyUtils$$anonfun$2.apply(JettyUtils.scala:204)
+	at org.apache.spark.ui.JettyUtils$$anonfun$2.apply(JettyUtils.scala:204)
+	at org.apache.spark.util.Utils$$anonfun$startServiceOnPort$1.apply$mcVI$sp(Utils.scala:1676)
+	at scala.collection.immutable.Range.foreach$mVc$sp(Range.scala:141)
+	at org.apache.spark.util.Utils$.startServiceOnPort(Utils.scala:1667)
+	at org.apache.spark.ui.JettyUtils$.startJettyServer(JettyUtils.scala:204)
+	at org.apache.spark.ui.WebUI.bind(WebUI.scala:102)
+	at org.apache.spark.SparkContext$$anonfun$10.apply(SparkContext.scala:269)
+	at org.apache.spark.SparkContext$$anonfun$10.apply(SparkContext.scala:269)
+	at scala.Option.foreach(Option.scala:236)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:269)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:136)
+	at learningsparkexamples.basic.BasicAvgFunSuite.beforeAll(BasicAvgFunSuite.scala:18)
+	at org.scalatest.BeforeAndAfterAll$class.beforeAll(BeforeAndAfterAll.scala:187)
+	at learningsparkexamples.AbstractSparkFunSuite.beforeAll(AbstractSparkFunSuite.scala:13)
+	at org.scalatest.BeforeAndAfterAll$class.run(BeforeAndAfterAll.scala:253)
+	at learningsparkexamples.AbstractSparkFunSuite.org$scalatest$BeforeAndAfter$$super$run(AbstractSparkFunSuite.scala:13)
+	at org.scalatest.BeforeAndAfter$class.run(BeforeAndAfter.scala:241)
+	at learningsparkexamples.AbstractSparkFunSuite.run(AbstractSparkFunSuite.scala:13)
+	at org.scalatest.Suite$class.callExecuteOnSuite$1(Suite.scala:1492)
+	at org.scalatest.Suite$$anonfun$runNestedSuites$1.apply(Suite.scala:1528)
+	at org.scalatest.Suite$$anonfun$runNestedSuites$1.apply(Suite.scala:1526)
+	at scala.collection.IndexedSeqOptimized$class.foreach(IndexedSeqOptimized.scala:33)
+	at scala.collection.mutable.ArrayOps$ofRef.foreach(ArrayOps.scala:108)
+	at org.scalatest.Suite$class.runNestedSuites(Suite.scala:1526)
+	at org.scalatest.tools.DiscoverySuite.runNestedSuites(DiscoverySuite.scala:29)
+	at org.scalatest.Suite$class.run(Suite.scala:1421)
+	at org.scalatest.tools.DiscoverySuite.run(DiscoverySuite.scala:29)
+	at org.scalatest.tools.SuiteRunner.run(SuiteRunner.scala:55)
+	at org.scalatest.tools.Runner$$anonfun$doRunRunRunDaDoRunRun$3.apply(Runner.scala:2563)
+	at org.scalatest.tools.Runner$$anonfun$doRunRunRunDaDoRunRun$3.apply(Runner.scala:2557)
+	at scala.collection.immutable.List.foreach(List.scala:318)
+	at org.scalatest.tools.Runner$.doRunRunRunDaDoRunRun(Runner.scala:2557)
+	at org.scalatest.tools.Runner$$anonfun$runOptionallyWithPassFailReporter$2.apply(Runner.scala:1044)
+	at org.scalatest.tools.Runner$$anonfun$runOptionallyWithPassFailReporter$2.apply(Runner.scala:1043)
+	at org.scalatest.tools.Runner$.withClassLoaderAndDispatchReporter(Runner.scala:2722)
+	at org.scalatest.tools.Runner$.runOptionallyWithPassFailReporter(Runner.scala:1043)
+	at org.scalatest.tools.Runner$.main(Runner.scala:860)
+	at org.scalatest.tools.Runner.main(Runner.scala)
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/stages/stage/kill,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/static,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/executors/threadDump/json,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/executors/threadDump,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/executors/json,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/executors,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/environment/json,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/environment,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/storage/rdd/json,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/storage/rdd,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/storage/json,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/storage,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/stages/pool/json,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/stages/pool,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/stages/stage/json,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/stages/stage,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/stages/json,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/stages,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/jobs/job/json,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/jobs/job,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/jobs/json,null}
+15/02/02 16:15:08 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/jobs,null}
+15/02/02 16:15:08 WARN util.Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
+15/02/02 16:15:08 INFO server.Server: jetty-8.1.14.v20131031
+15/02/02 16:15:08 INFO server.AbstractConnector: Started SelectChannelConnector@0.0.0.0:4041
+15/02/02 16:15:08 INFO util.Utils: Successfully started service 'SparkUI' on port 4041.
+15/02/02 16:15:08 INFO ui.SparkUI: Started SparkUI at http://192.168.40.244:4041
+15/02/02 16:15:09 INFO util.AkkaUtils: Connecting to HeartbeatReceiver: akka.tcp://sparkDriver@192.168.40.244:54645/user/HeartbeatReceiver
+15/02/02 16:15:09 INFO netty.NettyBlockTransferService: Server created on 54649
+15/02/02 16:15:09 INFO storage.BlockManagerMaster: Trying to register BlockManager
+15/02/02 16:15:09 INFO storage.BlockManagerMasterActor: Registering block manager localhost:54649 with 983.1 MB RAM, BlockManagerId(<driver>, localhost, 54649)
+15/02/02 16:15:09 INFO storage.BlockManagerMaster: Registered BlockManager
+15/02/02 16:15:09 INFO spark.SparkContext: Starting job: aggregate at BasicAvgFunSuite.scala:30
+15/02/02 16:15:09 INFO scheduler.DAGScheduler: Got job 0 (aggregate at BasicAvgFunSuite.scala:30) with 1 output partitions (allowLocal=false)
+15/02/02 16:15:09 INFO scheduler.DAGScheduler: Final stage: Stage 0(aggregate at BasicAvgFunSuite.scala:30)
+15/02/02 16:15:09 INFO scheduler.DAGScheduler: Parents of final stage: List()
+15/02/02 16:15:09 INFO scheduler.DAGScheduler: Missing parents: List()
+15/02/02 16:15:09 INFO scheduler.DAGScheduler: Submitting Stage 0 (ParallelCollectionRDD[0] at parallelize at BasicAvgFunSuite.scala:29), which has no missing parents
+15/02/02 16:15:09 INFO storage.MemoryStore: ensureFreeSpace(1408) called with curMem=0, maxMem=1030823608
+15/02/02 16:15:09 INFO storage.MemoryStore: Block broadcast_0 stored as values in memory (estimated size 1408.0 B, free 983.1 MB)
+15/02/02 16:15:09 INFO storage.MemoryStore: ensureFreeSpace(1048) called with curMem=1408, maxMem=1030823608
+15/02/02 16:15:09 INFO storage.MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 1048.0 B, free 983.1 MB)
+15/02/02 16:15:09 INFO storage.BlockManagerInfo: Added broadcast_0_piece0 in memory on localhost:54649 (size: 1048.0 B, free: 983.1 MB)
+15/02/02 16:15:09 INFO storage.BlockManagerMaster: Updated info of block broadcast_0_piece0
+15/02/02 16:15:09 INFO spark.SparkContext: Created broadcast 0 from broadcast at DAGScheduler.scala:838
+15/02/02 16:15:10 INFO scheduler.DAGScheduler: Submitting 1 missing tasks from Stage 0 (ParallelCollectionRDD[0] at parallelize at BasicAvgFunSuite.scala:29)
+15/02/02 16:15:10 INFO scheduler.TaskSchedulerImpl: Adding task set 0.0 with 1 tasks
+15/02/02 16:15:10 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0, localhost, PROCESS_LOCAL, 1216 bytes)
+15/02/02 16:15:10 INFO executor.Executor: Running task 0.0 in stage 0.0 (TID 0)
+15/02/02 16:15:10 INFO executor.Executor: Finished task 0.0 in stage 0.0 (TID 0). 705 bytes result sent to driver
+15/02/02 16:15:10 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 51 ms on localhost (1/1)
+15/02/02 16:15:10 INFO scheduler.DAGScheduler: Stage 0 (aggregate at BasicAvgFunSuite.scala:30) finished in 0.066 s
+15/02/02 16:15:10 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool
+15/02/02 16:15:10 INFO scheduler.DAGScheduler: Job 0 finished: aggregate at BasicAvgFunSuite.scala:30, took 0.295073 s
+Avg of List(1,2,3,4) = 2.5, result=(10,4)
+- basic avg
+15/02/02 16:15:10 INFO storage.MemoryStore: ensureFreeSpace(138675) called with curMem=2456, maxMem=1030823608
+15/02/02 16:15:10 INFO storage.MemoryStore: Block broadcast_1 stored as values in memory (estimated size 135.4 KB, free 982.9 MB)
+15/02/02 16:15:10 INFO storage.MemoryStore: ensureFreeSpace(18512) called with curMem=141131, maxMem=1030823608
+15/02/02 16:15:10 INFO storage.MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 18.1 KB, free 982.9 MB)
+15/02/02 16:15:10 INFO storage.BlockManagerInfo: Added broadcast_1_piece0 in memory on localhost:54649 (size: 18.1 KB, free: 983.1 MB)
+15/02/02 16:15:10 INFO storage.BlockManagerMaster: Updated info of block broadcast_1_piece0
+15/02/02 16:15:10 INFO spark.SparkContext: Created broadcast 1 from textFile at BasicAvgFunSuite.scala:38
+15/02/02 16:15:10 INFO storage.BlockManager: Removing broadcast 0
+15/02/02 16:15:10 INFO storage.BlockManager: Removing block broadcast_0
+15/02/02 16:15:10 INFO storage.MemoryStore: Block broadcast_0 of size 1408 dropped from memory (free 1030665373)
+15/02/02 16:15:10 INFO storage.BlockManager: Removing block broadcast_0_piece0
+15/02/02 16:15:10 INFO storage.MemoryStore: Block broadcast_0_piece0 of size 1048 dropped from memory (free 1030666421)
+15/02/02 16:15:10 INFO storage.BlockManagerInfo: Removed broadcast_0_piece0 on localhost:54649 in memory (size: 1048.0 B, free: 983.1 MB)
+15/02/02 16:15:10 INFO storage.BlockManagerMaster: Updated info of block broadcast_0_piece0
+15/02/02 16:15:10 INFO spark.ContextCleaner: Cleaned broadcast 0
+15/02/02 16:15:10 INFO mapred.FileInputFormat: Total input paths to process : 1
+15/02/02 16:15:10 INFO spark.SparkContext: Starting job: aggregate at BasicAvgFunSuite.scala:40
+15/02/02 16:15:10 INFO scheduler.DAGScheduler: Got job 1 (aggregate at BasicAvgFunSuite.scala:40) with 1 output partitions (allowLocal=false)
+15/02/02 16:15:10 INFO scheduler.DAGScheduler: Final stage: Stage 1(aggregate at BasicAvgFunSuite.scala:40)
+15/02/02 16:15:10 INFO scheduler.DAGScheduler: Parents of final stage: List()
+15/02/02 16:15:10 INFO scheduler.DAGScheduler: Missing parents: List()
+15/02/02 16:15:10 INFO scheduler.DAGScheduler: Submitting Stage 1 (MappedRDD[3] at map at BasicAvgFunSuite.scala:39), which has no missing parents
+15/02/02 16:15:10 INFO storage.MemoryStore: ensureFreeSpace(3096) called with curMem=157187, maxMem=1030823608
+15/02/02 16:15:10 INFO storage.MemoryStore: Block broadcast_2 stored as values in memory (estimated size 3.0 KB, free 982.9 MB)
+15/02/02 16:15:10 INFO storage.MemoryStore: ensureFreeSpace(2187) called with curMem=160283, maxMem=1030823608
+15/02/02 16:15:10 INFO storage.MemoryStore: Block broadcast_2_piece0 stored as bytes in memory (estimated size 2.1 KB, free 982.9 MB)
+15/02/02 16:15:10 INFO storage.BlockManagerInfo: Added broadcast_2_piece0 in memory on localhost:54649 (size: 2.1 KB, free: 983.1 MB)
+15/02/02 16:15:10 INFO storage.BlockManagerMaster: Updated info of block broadcast_2_piece0
+15/02/02 16:15:10 INFO spark.SparkContext: Created broadcast 2 from broadcast at DAGScheduler.scala:838
+15/02/02 16:15:10 INFO scheduler.DAGScheduler: Submitting 1 missing tasks from Stage 1 (MappedRDD[3] at map at BasicAvgFunSuite.scala:39)
+15/02/02 16:15:10 INFO scheduler.TaskSchedulerImpl: Adding task set 1.0 with 1 tasks
+15/02/02 16:15:10 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 1.0 (TID 1, localhost, PROCESS_LOCAL, 1326 bytes)
+15/02/02 16:15:10 INFO executor.Executor: Running task 0.0 in stage 1.0 (TID 1)
+15/02/02 16:15:10 INFO rdd.HadoopRDD: Input split: file:/Users/debop/work/debop/spark-examples/files/basicAvg.txt:0+7
+15/02/02 16:15:10 INFO Configuration.deprecation: mapred.tip.id is deprecated. Instead, use mapreduce.task.id
+15/02/02 16:15:10 INFO Configuration.deprecation: mapred.task.id is deprecated. Instead, use mapreduce.task.attempt.id
+15/02/02 16:15:10 INFO Configuration.deprecation: mapred.task.is.map is deprecated. Instead, use mapreduce.task.ismap
+15/02/02 16:15:10 INFO Configuration.deprecation: mapred.task.partition is deprecated. Instead, use mapreduce.task.partition
+15/02/02 16:15:10 INFO Configuration.deprecation: mapred.job.id is deprecated. Instead, use mapreduce.job.id
+15/02/02 16:15:10 INFO executor.Executor: Finished task 0.0 in stage 1.0 (TID 1). 1813 bytes result sent to driver
+15/02/02 16:15:10 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 1.0 (TID 1) in 41 ms on localhost (1/1)
+15/02/02 16:15:10 INFO scheduler.DAGScheduler: Stage 1 (aggregate at BasicAvgFunSuite.scala:40) finished in 0.042 s
+15/02/02 16:15:10 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 1.0, whose tasks have all completed, from pool
+15/02/02 16:15:10 INFO scheduler.DAGScheduler: Job 1 finished: aggregate at BasicAvgFunSuite.scala:40, took 0.062520 s
+Avg of List(1,2,3,4) = 2.5, result=(10,4)
+- basic avg from File
+15/02/02 16:15:10 INFO storage.MemoryStore: ensureFreeSpace(177742) called with curMem=162470, maxMem=1030823608
+15/02/02 16:15:10 INFO storage.MemoryStore: Block broadcast_3 stored as values in memory (estimated size 173.6 KB, free 982.7 MB)
+15/02/02 16:15:10 INFO storage.MemoryStore: ensureFreeSpace(25767) called with curMem=340212, maxMem=1030823608
+15/02/02 16:15:10 INFO storage.MemoryStore: Block broadcast_3_piece0 stored as bytes in memory (estimated size 25.2 KB, free 982.7 MB)
+15/02/02 16:15:10 INFO storage.BlockManagerInfo: Added broadcast_3_piece0 in memory on localhost:54649 (size: 25.2 KB, free: 983.0 MB)
+15/02/02 16:15:10 INFO storage.BlockManagerMaster: Updated info of block broadcast_3_piece0
+15/02/02 16:15:10 INFO spark.SparkContext: Created broadcast 3 from wholeTextFiles at BasicAvgFunSuite.scala:52
+15/02/02 16:15:10 INFO input.FileInputFormat: Total input paths to process : 3
+15/02/02 16:15:10 INFO input.FileInputFormat: Total input paths to process : 3
+15/02/02 16:15:10 INFO input.CombineFileInputFormat: DEBUG: Terminated node allocation with : CompletedNodes: 1, size left: 0
+15/02/02 16:15:10 INFO spark.SparkContext: Starting job: saveAsTextFile at BasicAvgFunSuite.scala:57
+15/02/02 16:15:10 INFO scheduler.DAGScheduler: Got job 2 (saveAsTextFile at BasicAvgFunSuite.scala:57) with 1 output partitions (allowLocal=false)
+15/02/02 16:15:10 INFO scheduler.DAGScheduler: Final stage: Stage 2(saveAsTextFile at BasicAvgFunSuite.scala:57)
+15/02/02 16:15:10 INFO scheduler.DAGScheduler: Parents of final stage: List()
+15/02/02 16:15:10 INFO scheduler.DAGScheduler: Missing parents: List()
+15/02/02 16:15:10 INFO scheduler.DAGScheduler: Submitting Stage 2 (MappedRDD[6] at saveAsTextFile at BasicAvgFunSuite.scala:57), which has no missing parents
+15/02/02 16:15:10 INFO storage.MemoryStore: ensureFreeSpace(95184) called with curMem=365979, maxMem=1030823608
+15/02/02 16:15:10 INFO storage.MemoryStore: Block broadcast_4 stored as values in memory (estimated size 93.0 KB, free 982.6 MB)
+15/02/02 16:15:10 INFO storage.MemoryStore: ensureFreeSpace(56709) called with curMem=461163, maxMem=1030823608
+15/02/02 16:15:10 INFO storage.MemoryStore: Block broadcast_4_piece0 stored as bytes in memory (estimated size 55.4 KB, free 982.6 MB)
+15/02/02 16:15:10 INFO storage.BlockManagerInfo: Added broadcast_4_piece0 in memory on localhost:54649 (size: 55.4 KB, free: 983.0 MB)
+15/02/02 16:15:10 INFO storage.BlockManagerMaster: Updated info of block broadcast_4_piece0
+15/02/02 16:15:10 INFO spark.SparkContext: Created broadcast 4 from broadcast at DAGScheduler.scala:838
+15/02/02 16:15:10 INFO scheduler.DAGScheduler: Submitting 1 missing tasks from Stage 2 (MappedRDD[6] at saveAsTextFile at BasicAvgFunSuite.scala:57)
+15/02/02 16:15:10 INFO scheduler.TaskSchedulerImpl: Adding task set 2.0 with 1 tasks
+15/02/02 16:15:10 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 2.0 (TID 2, localhost, PROCESS_LOCAL, 1498 bytes)
+15/02/02 16:15:10 INFO executor.Executor: Running task 0.0 in stage 2.0 (TID 2)
+15/02/02 16:15:10 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+15/02/02 16:15:10 INFO Configuration.deprecation: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+15/02/02 16:15:10 INFO Configuration.deprecation: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+15/02/02 16:15:10 INFO Configuration.deprecation: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+15/02/02 16:15:10 INFO rdd.WholeTextFileRDD: Input split: Paths:/Users/debop/work/debop/spark-examples/files/basicavgs/basicAvg-1.txt:0+7,/Users/debop/work/debop/spark-examples/files/basicavgs/basicAvg-2.txt:0+7
+15/02/02 16:15:11 INFO output.FileOutputCommitter: Saved output of task 'attempt_201502021615_0002_m_000000_2' to file:/Users/debop/work/debop/spark-examples/files/basicavgs/output/_temporary/0/task_201502021615_0002_m_000000
+15/02/02 16:15:11 INFO spark.SparkHadoopWriter: attempt_201502021615_0002_m_000000_2: Committed
+15/02/02 16:15:11 INFO executor.Executor: Finished task 0.0 in stage 2.0 (TID 2). 611 bytes result sent to driver
+15/02/02 16:15:11 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 2.0 (TID 2) in 172 ms on localhost (1/1)
+15/02/02 16:15:11 INFO scheduler.DAGScheduler: Stage 2 (saveAsTextFile at BasicAvgFunSuite.scala:57) finished in 0.172 s
+15/02/02 16:15:11 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 2.0, whose tasks have all completed, from pool
+15/02/02 16:15:11 INFO scheduler.DAGScheduler: Job 2 finished: saveAsTextFile at BasicAvgFunSuite.scala:57, took 0.222825 s
+- basic avg from Directory
+15/02/02 16:15:11 INFO spark.SparkContext: Starting job: reduce at BasicAvgFunSuite.scala:62
+15/02/02 16:15:11 INFO scheduler.DAGScheduler: Got job 3 (reduce at BasicAvgFunSuite.scala:62) with 1 output partitions (allowLocal=false)
+15/02/02 16:15:11 INFO scheduler.DAGScheduler: Final stage: Stage 3(reduce at BasicAvgFunSuite.scala:62)
+15/02/02 16:15:11 INFO scheduler.DAGScheduler: Parents of final stage: List()
+15/02/02 16:15:11 INFO scheduler.DAGScheduler: Missing parents: List()
+15/02/02 16:15:11 INFO scheduler.DAGScheduler: Submitting Stage 3 (MapPartitionsRDD[8] at mapPartitions at BasicAvgFunSuite.scala:62), which has no missing parents
+15/02/02 16:15:11 INFO storage.MemoryStore: ensureFreeSpace(2032) called with curMem=517872, maxMem=1030823608
+15/02/02 16:15:11 INFO storage.MemoryStore: Block broadcast_5 stored as values in memory (estimated size 2032.0 B, free 982.6 MB)
+15/02/02 16:15:11 INFO storage.MemoryStore: ensureFreeSpace(1409) called with curMem=519904, maxMem=1030823608
+15/02/02 16:15:11 INFO storage.MemoryStore: Block broadcast_5_piece0 stored as bytes in memory (estimated size 1409.0 B, free 982.6 MB)
+15/02/02 16:15:11 INFO storage.BlockManagerInfo: Added broadcast_5_piece0 in memory on localhost:54649 (size: 1409.0 B, free: 983.0 MB)
+15/02/02 16:15:11 INFO storage.BlockManagerMaster: Updated info of block broadcast_5_piece0
+15/02/02 16:15:11 INFO spark.SparkContext: Created broadcast 5 from broadcast at DAGScheduler.scala:838
+15/02/02 16:15:11 INFO scheduler.DAGScheduler: Submitting 1 missing tasks from Stage 3 (MapPartitionsRDD[8] at mapPartitions at BasicAvgFunSuite.scala:62)
+15/02/02 16:15:11 INFO scheduler.TaskSchedulerImpl: Adding task set 3.0 with 1 tasks
+15/02/02 16:15:11 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 3.0 (TID 3, localhost, PROCESS_LOCAL, 1216 bytes)
+15/02/02 16:15:11 INFO executor.Executor: Running task 0.0 in stage 3.0 (TID 3)
+15/02/02 16:15:11 INFO executor.Executor: Finished task 0.0 in stage 3.0 (TID 3). 725 bytes result sent to driver
+15/02/02 16:15:11 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 3.0 (TID 3) in 7 ms on localhost (1/1)
+15/02/02 16:15:11 INFO scheduler.DAGScheduler: Stage 3 (reduce at BasicAvgFunSuite.scala:62) finished in 0.007 s
+15/02/02 16:15:11 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 3.0, whose tasks have all completed, from pool
+15/02/02 16:15:11 INFO scheduler.DAGScheduler: Job 3 finished: reduce at BasicAvgFunSuite.scala:62, took 0.020788 s
+map partition result=AvgCount(10,4)
+- map partitions
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/stages/stage/kill,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/static,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/executors/threadDump/json,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/executors/threadDump,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/executors/json,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/executors,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/environment/json,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/environment,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/storage/rdd/json,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/storage/rdd,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/storage/json,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/storage,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/stages/pool/json,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/stages/pool,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/stages/stage/json,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/stages/stage,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/stages/json,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/stages,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/jobs/job/json,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/jobs/job,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/jobs/json,null}
+15/02/02 16:15:11 INFO handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/jobs,null}
+15/02/02 16:15:11 INFO ui.SparkUI: Stopped Spark web UI at http://192.168.40.244:4041
+15/02/02 16:15:11 INFO scheduler.DAGScheduler: Stopping DAGScheduler
+15/02/02 16:15:12 INFO spark.MapOutputTrackerMasterActor: MapOutputTrackerActor stopped!
+15/02/02 16:15:12 INFO storage.MemoryStore: MemoryStore cleared
+15/02/02 16:15:12 INFO storage.BlockManager: BlockManager stopped
+15/02/02 16:15:12 INFO storage.BlockManagerMaster: BlockManagerMaster stopped
+15/02/02 16:15:12 INFO spark.SparkContext: Successfully stopped SparkContext
+15/02/02 16:15:12 INFO remote.RemoteActorRefProvider$RemotingTerminator: Shutting down remote daemon.
+BasicAvgWithKyroFunSuite:
+15/02/02 16:15:12 INFO remote.RemoteActorRefProvider$RemotingTerminator: Remote daemon shut down; proceeding with flushing remote transports.
+15/02/02 16:15:12 INFO spark.SecurityManager: Changing view acls to: debop
+15/02/02 16:15:12 INFO spark.SecurityManager: Changing modify acls to: debop
+15/02/02 16:15:12 INFO spark.SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: Set(debop); users with modify permissions: Set(debop)
+15/02/02 16:15:12 INFO slf4j.Slf4jLogger: Slf4jLogger started
+15/02/02 16:15:12 INFO Remoting: Starting remoting
+15/02/02 16:15:12 INFO remote.RemoteActorRefProvider$RemotingTerminator: Remoting shut down.
+15/02/02 16:15:12 INFO Remoting: Remoting started; listening on addresses :[akka.tcp://sparkDriver@localhost:54654]
+15/02/02 16:15:12 INFO util.Utils: Successfully started service 'sparkDriver' on port 54654.
+15/02/02 16:15:12 INFO spark.SparkEnv: Registering MapOutputTracker
+15/02/02 16:15:12 INFO spark.SparkEnv: Registering BlockManagerMaster
+15/02/02 16:15:12 INFO storage.DiskBlockManager: Created local directory at /var/folders/95/65nsj5yd4236dw707_xnxl340000gn/T/spark-local-20150202161512-a939
+15/02/02 16:15:12 INFO storage.MemoryStore: MemoryStore started with capacity 983.1 MB
+15/02/02 16:15:12 INFO spark.HttpFileServer: HTTP File server directory is /var/folders/95/65nsj5yd4236dw707_xnxl340000gn/T/spark-c3face64-9aa0-472f-a047-2ceef977c2c4
+15/02/02 16:15:12 INFO spark.HttpServer: Starting HTTP Server
+15/02/02 16:15:12 INFO server.Server: jetty-8.1.14.v20131031
+15/02/02 16:15:12 INFO server.AbstractConnector: Started SocketConnector@0.0.0.0:54655
+15/02/02 16:15:12 INFO util.Utils: Successfully started service 'HTTP file server' on port 54655.
+15/02/02 16:15:12 INFO server.Server: jetty-8.1.14.v20131031
+15/02/02 16:15:12 INFO server.AbstractConnector: Started SelectChannelConnector@0.0.0.0:4040
+15/02/02 16:15:12 INFO util.Utils: Successfully started service 'SparkUI' on port 4040.
+15/02/02 16:15:12 INFO ui.SparkUI: Started SparkUI at http://localhost:4040
+15/02/02 16:15:12 INFO util.AkkaUtils: Connecting to HeartbeatReceiver: akka.tcp://sparkDriver@localhost:54654/user/HeartbeatReceiver
+15/02/02 16:15:12 INFO netty.NettyBlockTransferService: Server created on 54656
+15/02/02 16:15:12 INFO storage.BlockManagerMaster: Trying to register BlockManager
+15/02/02 16:15:12 INFO storage.BlockManagerMasterActor: Registering block manager localhost:54656 with 983.1 MB RAM, BlockManagerId(<driver>, localhost, 54656)
+15/02/02 16:15:12 INFO storage.BlockManagerMaster: Registered BlockManager
+15/02/02 16:15:12 INFO spark.SparkContext: Starting job: aggregate at BasicAvgWithKyroFunSuite.scala:18
+15/02/02 16:15:12 INFO scheduler.DAGScheduler: Got job 0 (aggregate at BasicAvgWithKyroFunSuite.scala:18) with 1 output partitions (allowLocal=false)
+15/02/02 16:15:12 INFO scheduler.DAGScheduler: Final stage: Stage 0(aggregate at BasicAvgWithKyroFunSuite.scala:18)
+15/02/02 16:15:12 INFO scheduler.DAGScheduler: Parents of final stage: List()
+15/02/02 16:15:12 INFO scheduler.DAGScheduler: Missing parents: List()
+15/02/02 16:15:12 INFO scheduler.DAGScheduler: Submitting Stage 0 (ParallelCollectionRDD[0] at parallelize at BasicAvgWithKyroFunSuite.scala:17), which has no missing parents
+15/02/02 16:15:12 INFO storage.MemoryStore: ensureFreeSpace(1424) called with curMem=0, maxMem=1030823608
+15/02/02 16:15:12 INFO storage.MemoryStore: Block broadcast_0 stored as values in memory (estimated size 1424.0 B, free 983.1 MB)
+15/02/02 16:15:12 INFO storage.MemoryStore: ensureFreeSpace(968) called with curMem=1424, maxMem=1030823608
+15/02/02 16:15:12 INFO storage.MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 968.0 B, free 983.1 MB)
+15/02/02 16:15:12 INFO storage.BlockManagerInfo: Added broadcast_0_piece0 in memory on localhost:54656 (size: 968.0 B, free: 983.1 MB)
+15/02/02 16:15:12 INFO storage.BlockManagerMaster: Updated info of block broadcast_0_piece0
+15/02/02 16:15:12 INFO spark.SparkContext: Created broadcast 0 from broadcast at DAGScheduler.scala:838
+15/02/02 16:15:12 INFO scheduler.DAGScheduler: Submitting 1 missing tasks from Stage 0 (ParallelCollectionRDD[0] at parallelize at BasicAvgWithKyroFunSuite.scala:17)
+15/02/02 16:15:12 INFO scheduler.TaskSchedulerImpl: Adding task set 0.0 with 1 tasks
+15/02/02 16:15:12 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0, localhost, PROCESS_LOCAL, 1164 bytes)
+15/02/02 16:15:12 INFO executor.Executor: Running task 0.0 in stage 0.0 (TID 0)
+15/02/02 16:15:12 INFO executor.Executor: Finished task 0.0 in stage 0.0 (TID 0). 577 bytes result sent to driver
+15/02/02 16:15:12 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 27 ms on localhost (1/1)
+15/02/02 16:15:12 INFO scheduler.DAGScheduler: Stage 0 (aggregate at BasicAvgWithKyroFunSuite.scala:18) finished in 0.033 s
+15/02/02 16:15:12 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool
+15/02/02 16:15:12 INFO scheduler.DAGScheduler: Job 0 finished: aggregate at BasicAvgWithKyroFunSuite.scala:18, took 0.190743 s
