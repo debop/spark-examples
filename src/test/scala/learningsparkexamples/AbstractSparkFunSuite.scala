@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory
  */
 abstract class AbstractSparkFunSuite extends FunSuite with Matchers with BeforeAndAfterAll with BeforeAndAfter {
 
-  protected val log = LoggerFactory.getLogger(getClass)
+  private val log = LoggerFactory.getLogger(getClass)
 
 
   protected def deleteDirectory(path: String): Unit = {

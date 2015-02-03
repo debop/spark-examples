@@ -1,0 +1,79 @@
+package learningsparkexamples.basic
+
+import java.io.{StringReader, StringWriter}
+
+import au.com.bytecode.opencsv.{CSVReader, CSVWriter}
+import com.google.gson.Gson
+import learningsparkexamples.AbstractSparkFunSuite
+import org.apache.spark.SparkContext
+import org.apache.spark.rdd.RDD
+
+import scala.collection.JavaConverters._
+
+/**
+ * ParseFunSuite
+ * @author sunghyouk.bae@gmail.com
+ */
+class ParseFunSuite extends AbstractSparkFunSuite {
+
+  test("parse csv") {
+    val sc = new SparkContext("local", "BasicParseCsv", System.getenv("SPARK_HOME"))
+
+    val inputFile = "files/favourite_animals.csv"
+    val outputFile = "files/favourite_animals_output"
+    val input = sc.textFile(inputFile)
+
+    deleteDirectory(outputFile)
+
+    val result: RDD[Array[String]] = input.map { (line: String) =>
+      val reader = new CSVReader(new StringReader(line))
+      reader.readNext()
+    }
+
+    val people: RDD[Person] = result.map(x => Person(x(0), x(1)))
+    val pandaLovers = people.filter(person => person.favouriteAnimal == "panda")
+
+    pandaLovers
+    .map(person => List(person.name, person.favouriteAnimal).toArray)
+    .mapPartitions { (people: Iterator[Array[String]]) =>
+      val stringWriter = new StringWriter()
+      val csvWriter = new CSVWriter(stringWriter)
+      csvWriter.writeAll(people.toList.asJava)
+      Iterator(stringWriter.toString)
+    }.saveAsTextFile(outputFile)
+
+    sc.stop()
+  }
+
+  test("parse JSON") {
+
+    val sc = new SparkContext("local", "BasicParseJson", System.getenv("SPARK_HOME"))
+
+    val inputFile = "files/pandainfo.json"
+    val outputFile = "files/pandainfo"
+    deleteDirectory(outputFile)
+
+    val input = sc.textFile(inputFile)
+
+    val result = input.map { line =>
+      println(s"line=$line")
+
+      // 인스턴스를 spark action 안에서 정의해야 Serialization 예외가 발생하지 않는다.
+      // 아마 map 이 병렬로 분산 실행된다면, 각각의 인스턴스가 필요하기 때문일 듯...
+      val gson = new Gson()
+      gson.fromJson(line, classOf[PersonPanda])
+    }
+
+    result
+    .filter(_.lovesPandas)
+    .map(new Gson().toJson(_))
+    .saveAsTextFile(outputFile)
+
+    sc.stop()
+
+  }
+}
+
+
+case class Person(name: String, favouriteAnimal: String)
+case class PersonPanda(name: String, lovesPandas: Boolean)

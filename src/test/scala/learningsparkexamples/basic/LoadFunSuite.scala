@@ -1,6 +1,10 @@
 package learningsparkexamples.basic
 
+import java.io.File
+
 import learningsparkexamples.AbstractSparkFunSuite
+import org.apache.commons.io.FileUtils
+import org.apache.hadoop.io.{IntWritable, Text}
 import org.apache.spark.SparkContext._
 import org.apache.spark._
 
@@ -55,6 +59,23 @@ class LoadFunSuite extends AbstractSparkFunSuite {
     } else {
       println(s"Too many errors ${errorLines.value} for ${dataLines.value}")
     }
+
+    sc.stop()
+  }
+
+  test("load string int file") {
+    val sc = new SparkContext("local", "Load Sequence File", System.getenv("SPARK_HOME"))
+
+    val output = "files/load/output"
+    FileUtils.deleteDirectory(new File(output))
+
+    val input = sc.parallelize(List(("panda", 2), ("happy", 3), ("china", 1)))
+    input.saveAsSequenceFile(output)
+
+    val data = sc.sequenceFile("files/load/output/part-00000", classOf[Text], classOf[IntWritable])
+               .map { case (x, y) => (x.toString, y.get())}
+
+    println(s"data=${data.collect().toList}")
 
     sc.stop()
   }
