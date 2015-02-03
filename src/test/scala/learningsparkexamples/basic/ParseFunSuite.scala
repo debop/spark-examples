@@ -103,6 +103,21 @@ class ParseFunSuite extends AbstractSparkFunSuite {
 
     sc.stop()
   }
+
+  test("parse whole file csv") {
+    val sc = new SparkContext("local", "BasicParseWholeFileCsv", System.getenv("SPARK_HOME"))
+
+    val inputFile = "files/int_string.csv"
+    val input = sc.wholeTextFiles(inputFile)
+
+    val result: RDD[Array[String]] = input.flatMap {
+      case (_, txt) =>
+        val reader = new CSVReader(new StringReader(txt))
+        reader.readAll().asScala
+    }
+
+    println(result.collect().map(_.toList).mkString(","))
+  }
 }
 
 /**
