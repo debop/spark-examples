@@ -3,12 +3,16 @@ package learningsparkexamples.basic
 import java.io.{StringReader, StringWriter}
 
 import au.com.bytecode.opencsv.{CSVReader, CSVWriter}
+import com.fasterxml.jackson.databind.{DeserializationFeature, ObjectMapper}
+import com.fasterxml.jackson.module.scala.DefaultScalaModule
+import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 import com.google.gson.Gson
 import learningsparkexamples.AbstractSparkFunSuite
 import org.apache.spark.SparkContext
 import org.apache.spark.rdd.RDD
 
 import scala.collection.JavaConverters._
+import scala.util.control.NonFatal
 
 /**
  * ParseFunSuite
@@ -45,7 +49,7 @@ class ParseFunSuite extends AbstractSparkFunSuite {
     sc.stop()
   }
 
-  test("parse JSON") {
+  test("parse json with gson") {
 
     val sc = new SparkContext("local", "BasicParseJson", System.getenv("SPARK_HOME"))
 
@@ -55,22 +59,64 @@ class ParseFunSuite extends AbstractSparkFunSuite {
 
     val input = sc.textFile(inputFile)
 
-    val result = input.map { line =>
+    val result: RDD[PersonPanda] = input.map { line =>
       println(s"line=$line")
 
       // 인스턴스를 spark action 안에서 정의해야 Serialization 예외가 발생하지 않는다.
       // 아마 map 이 병렬로 분산 실행된다면, 각각의 인스턴스가 필요하기 때문일 듯...
-      val gson = new Gson()
+      val gson = JsonFactory.createGson()
       gson.fromJson(line, classOf[PersonPanda])
     }
 
     result
     .filter(_.lovesPandas)
-    .map(new Gson().toJson(_))
+    .map(JsonFactory.createGson().toJson(_))
     .saveAsTextFile(outputFile)
 
     sc.stop()
+  }
 
+  test("parse json with jackson") {
+    val sc = new SparkContext("local", "BasicParseJson", System.getenv("SPARK_HOME"))
+
+    val inputFile = "files/pandainfo.json"
+    val outputFile = "files/pandainfo"
+    deleteDirectory(outputFile)
+
+    val input = sc.textFile(inputFile)
+
+    val result = input.flatMap { record =>
+      try {
+        val mapper = JsonFactory.createJacksonMapper()
+        Some(mapper.readValue(record, classOf[PersonPanda]))
+      } catch {
+        case NonFatal(e) => None
+      }
+    }
+
+    result
+    .filter(_.lovesPandas)
+    .map { x =>
+      val mapper = JsonFactory.createJacksonMapper()
+      mapper.writeValueAsString(x)
+    }.saveAsTextFile(outputFile)
+
+    sc.stop()
+  }
+}
+
+/**
+ * Spark Action 내부에서 사용할 인스턴스의 경우 Object로 생성하도록 하면 된다.
+ */
+object JsonFactory {
+
+  def createGson() = new Gson()
+
+  def createJacksonMapper() = {
+    val mapper = new ObjectMapper with ScalaObjectMapper
+    mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+    mapper.registerModule(DefaultScalaModule)
+    mapper
   }
 }
 
