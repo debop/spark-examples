@@ -1,13 +1,20 @@
 package learningsparkexamples.basic
 
 import java.io.File
+import java.sql.{DriverManager, ResultSet}
 
 import learningsparkexamples.AbstractSparkFunSuite
 import org.apache.commons.io.FileUtils
 import org.apache.hadoop.io.{IntWritable, Text}
+import org.apache.hadoop.mapred.KeyValueTextInputFormat
 import org.apache.spark.SparkContext._
 import org.apache.spark._
+import org.apache.spark.rdd.{JdbcRDD, RDD}
+import org.apache.spark.sql.SQLContext
 
+import scala.slick.direct.AnnotationMapper.column
+import scala.slick.lifted.Tag
+import scala.slick.model.Table
 import scala.util.control.NonFatal
 
 /**
@@ -79,5 +86,31 @@ class LoadFunSuite extends AbstractSparkFunSuite {
 
     sc.stop()
   }
+
+  test("Load json with Spark SQL") {
+    val sc = new SparkContext("local", "Load Json with Spark SQL", System.getenv("SPARK_HOME"))
+    val sqlCtx = new SQLContext(sc)
+
+    val inputFile = "files/pandainfo.json"
+    val input = sqlCtx.jsonFile(inputFile)
+
+    input.printSchema()
+
+    sc.stop()
+  }
+
+  test("load key value from Text") {
+    val sc = new SparkContext("local", "Load Key Value from Text", System.getenv("SPARK_HOME"))
+    val inputFile = "files/key_value.txt"
+    val input: RDD[(String, String)] =
+      sc
+      .hadoopFile[Text, Text, KeyValueTextInputFormat](inputFile)
+      .map {
+        case (x, y) => (x.toString, y.toString)
+      }
+    println(s"key value: ${input.collect().toList}")
+    sc.stop()
+  }
+
 
 }
