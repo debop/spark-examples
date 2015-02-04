@@ -15,6 +15,7 @@
         <spark.version>1.2.0</spark.version>
         <mahout.version>0.9</mahout.version>
 
+        <slick.version>2.1.0</slick.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -178,6 +179,40 @@
             <version>2.0.4.RELEASE</version>
         </dependency>
 
+        <!-- Slick -->
+        <dependency>
+            <groupId>com.typesafe.slick</groupId>
+            <artifactId>slick_2.10</artifactId>
+            <version>${slick.version}</version>
+        </dependency>
+
+        <!-- Hikari CP -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP-java6</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+
+        <!-- Database Drivers -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.179</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.32</version>
+            <scope>test</scope>
+        </dependency>
 
         <!-- Test -->
         <dependency>
