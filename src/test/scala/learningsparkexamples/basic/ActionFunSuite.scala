@@ -29,11 +29,24 @@ class ActionFunSuite extends AbstractSparkFunSuite {
                           (acc: (Int, Int), v) => (acc._1 + v, acc._2 + 1),
                           (acc1: (Int, Int), acc2: (Int, Int)) => (acc1._1 + acc2._1, acc1._2 + acc2._2)
                         )
-    .map {
+      .map {
         case (key, value) => (key, value._1 / value._2.toFloat)
       }
 
     result.collectAsMap().map(println)
     sc.stop()
+  }
+
+  test("remove outliers") {
+    val sc = new SparkContext("local", "RemoveOutliers", System.getenv("SPARK_HOME"))
+    val input: RDD[Double] = sc.parallelize(List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1000)).map(_.toDouble)
+    val result: RDD[Double] = removeOutliers(input)
+    println("remove outliers: " + result.collect().mkString(","))
+  }
+
+  def removeOutliers(rdd: RDD[Double]): RDD[Double] = {
+    val summaryStats = rdd.stats()
+    val stddev = math.sqrt(summaryStats.variance)
+    rdd.filter(x => math.abs(x - summaryStats.mean) < 3 * stddev)
   }
 }

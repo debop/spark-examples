@@ -1,19 +1,14 @@
-package learningsparkexamples.basic
+package learningsparkexamples.sql
 
-import java.sql.{ResultSet, DriverManager}
+import java.sql.ResultSet
 import javax.sql.DataSource
 
 import learningsparkexamples.AbstractSparkFunSuite
-import learningsparkexamples.jdbc.{JdbcDrivers, DataSources}
+import learningsparkexamples.jdbc.{DataSources, JdbcDrivers}
 import org.apache.spark._
 import org.apache.spark.rdd.JdbcRDD
-import org.slf4j.LoggerFactory
 
-import scala.slick.driver.H2Driver
 import scala.util.Try
-import scala.slick.profile._
-import scala.slick.driver.JdbcProfile
-import scala.slick.lifted._
 
 /**
  * LoadSimpleJdbc
@@ -24,8 +19,8 @@ class LoadSimpleJdbc extends AbstractSparkFunSuite {
   lazy val driver = scala.slick.driver.H2Driver
   lazy val profile = driver.profile
 
-  import driver.simple._
-  import JdbcHelper._
+  import profile.simple._
+  import JdbcPandaHelper._
 
   test("load simple jdbc") {
 
@@ -45,16 +40,14 @@ class LoadSimpleJdbc extends AbstractSparkFunSuite {
   }
 }
 
-object JdbcHelper {
-
-  private val log = LoggerFactory.getLogger(getClass)
+object JdbcPandaHelper {
 
   lazy val driver = scala.slick.driver.H2Driver
   lazy val profile = driver.profile
 
-  import driver.simple._
+  import JdbcPandaHelper.driver.simple._
 
-  var dataSource : DataSource = _
+  var dataSource: DataSource = _
 
   def setupDatabase(): Unit = {
 
@@ -79,8 +72,8 @@ object JdbcHelper {
     println(s"Finish to create database")
   }
 
-  def getDataSource:DataSource = {
-    if(dataSource == null) {
+  def getDataSource: DataSource = {
+    if (dataSource == null) {
       dataSource = DataSources.getDataSource(JdbcDrivers.DRIVER_CLASS_H2, "jdbc:h2:mem:test", "sa", "")
     }
     dataSource
