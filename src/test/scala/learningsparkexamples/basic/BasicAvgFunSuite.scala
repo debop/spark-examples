@@ -16,7 +16,6 @@ class BasicAvgFunSuite extends AbstractSparkFunSuite {
     super.beforeAll()
     val master = "local"
     sc = new SparkContext(master, "BasicAvg", System.getenv("SPARK_HOME"))
-
   }
 
   override protected def afterAll(): Unit = {

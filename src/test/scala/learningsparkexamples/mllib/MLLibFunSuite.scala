@@ -9,7 +9,7 @@ class MLLibFunSuite extends AbstractSparkFunSuite {
 
   test("book example") {
 
-    val conf = new SparkConf().setAppName("Book example: Scala")
+    val conf = new SparkConf().setMaster("local").setAppName("Book example: Scala")
     val sc = new SparkContext(conf)
 
     // Load 2 types of emails from text files: spam and ham (non-spam)

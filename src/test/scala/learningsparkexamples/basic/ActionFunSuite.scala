@@ -42,6 +42,7 @@ class ActionFunSuite extends AbstractSparkFunSuite {
     val input: RDD[Double] = sc.parallelize(List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1000)).map(_.toDouble)
     val result: RDD[Double] = removeOutliers(input)
     println("remove outliers: " + result.collect().mkString(","))
+    sc.stop()
   }
 
   def removeOutliers(rdd: RDD[Double]): RDD[Double] = {

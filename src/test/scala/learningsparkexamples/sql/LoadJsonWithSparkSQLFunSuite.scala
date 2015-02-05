@@ -13,6 +13,8 @@ class LoadJsonWithSparkSQLFunSuite extends AbstractSparkFunSuite {
     val sqlCtx = new SQLContext(sc)
     val input = sqlCtx.jsonFile(inputFile)
     input.printSchema()
+
+    sc.stop()
   }
 
 }

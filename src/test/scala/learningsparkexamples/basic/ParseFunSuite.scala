@@ -117,6 +117,8 @@ class ParseFunSuite extends AbstractSparkFunSuite {
     }
 
     println(result.collect().map(_.toList).mkString(","))
+
+    sc.stop()
   }
 }
 
