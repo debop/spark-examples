@@ -32,7 +32,7 @@ class SparkALS extends AbstractSparkExample {
     var diffRmse = 100.0
     var iter = 1
 
-    while (diffRmse >= 1E-5) {
+    while (diffRmse > 1E-4) {
       println(s"Iteration $iter:")
       ms = sc.parallelize(0 until M, slices)
            .map(i => update(i, msb.value(i), usb.value, Rc.value))
