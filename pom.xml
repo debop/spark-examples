@@ -349,6 +349,7 @@
                     <testAnalysisCacheFile>${project.build.testOutputDirectory}/test-analysis-cache-file
                     </testAnalysisCacheFile>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                    <fork>true</fork>
                     <args>
                         <!-- NOTE: akka 사용 시에는 적용하면 안됩니다!!! -->
                         <!--<arg>-optimise</arg>-->
@@ -478,15 +479,16 @@
                 <version>1.0</version>
                 <configuration>
                     <forkMode>once</forkMode>
+                    <!--<parallel>false</parallel>-->
                     <argLine>-ea</argLine>
-                    <argLine>-server</argLine>
-                    <argLine>-Xmx2G</argLine>
+                    <argLine>-Xmx8G</argLine>
                     <argLine>-XX:+UseCompressedOops</argLine>
                     <argLine>-XX:+UseParallelOldGC</argLine>
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                 </configuration>
                 <executions>
                     <execution>
+                        <id>test</id>
                         <goals>
                             <goal>test</goal>
                         </goals>

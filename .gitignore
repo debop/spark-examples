@@ -16,4 +16,8 @@ project/plugins/project/
 .worksheet
 
 *.iml
-.idea
+.idea/
+
+# Hadoop output
+.output/
+._temporary/

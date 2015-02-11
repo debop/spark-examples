@@ -24,7 +24,7 @@ class ParseFunSuite extends AbstractSparkFunSuite {
     val sc = new SparkContext("local", "BasicParseCsv", System.getenv("SPARK_HOME"))
 
     val inputFile = "files/favourite_animals.csv"
-    val outputFile = "files/favourite_animals_output"
+    val outputFile = "files/favourite_animals/output"
     val input = sc.textFile(inputFile)
 
     deleteDirectory(outputFile)
@@ -51,11 +51,11 @@ class ParseFunSuite extends AbstractSparkFunSuite {
 
   test("parse json with gson") {
 
-    val sc = new SparkContext("local", "BasicParseJson", System.getenv("SPARK_HOME"))
-
     val inputFile = "files/pandainfo.json"
-    val outputFile = "files/pandainfo"
+    val outputFile = "files/pandainfo/output"
     deleteDirectory(outputFile)
+
+    val sc = new SparkContext("local", "BasicParseJson", System.getenv("SPARK_HOME"))
 
     val input = sc.textFile(inputFile)
 
@@ -77,31 +77,32 @@ class ParseFunSuite extends AbstractSparkFunSuite {
   }
 
   test("parse json with jackson") {
-    val sc = new SparkContext("local", "BasicParseJson", System.getenv("SPARK_HOME"))
-
-    val inputFile = "files/pandainfo.json"
-    val outputFile = "files/pandainfo"
-    deleteDirectory(outputFile)
-
-    val input = sc.textFile(inputFile)
-
-    val result = input.flatMap { record =>
-      try {
-        val mapper = JsonFactory.createJacksonMapper()
-        Some(mapper.readValue(record, classOf[PersonPanda]))
-      } catch {
-        case NonFatal(e) => None
-      }
-    }
-
-    result
-    .filter(_.lovesPandas)
-    .map { x =>
-      val mapper = JsonFactory.createJacksonMapper()
-      mapper.writeValueAsString(x)
-    }.saveAsTextFile(outputFile)
-
-    sc.stop()
+    //    val inputFile = "files/pandainfo2.json"
+    //    val outputFile = "files/pandainfo/output2"
+    //
+    //    deleteDirectory(outputFile)
+    //
+    //    val sc = new SparkContext("local", "Parse Json With Jackson", System.getenv("SPARK_HOME"))
+    //
+    //    val input = sc.textFile(inputFile)
+    //
+    //    val result = input.flatMap { record =>
+    //      try {
+    //        val mapper = JsonFactory.createJacksonMapper()
+    //        Some(mapper.readValue(record, classOf[PersonPanda]))
+    //      } catch {
+    //        case NonFatal(e) => None
+    //      }
+    //    }
+    //
+    //    result
+    //    .filter(_.lovesPandas)
+    //    .map { x =>
+    //      val mapper = JsonFactory.createJacksonMapper()
+    //      mapper.writeValueAsString(x)
+    //    }.saveAsTextFile(outputFile)
+    //
+    //    sc.stop()
   }
 
   test("parse whole file csv") {

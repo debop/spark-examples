@@ -7,6 +7,7 @@ import org.apache.spark.sql.SQLContext
 class LoadJsonWithSparkSQLFunSuite extends AbstractSparkFunSuite {
 
   test("load json with SparkSQL") {
+
     val inputFile = "files/pandainfo.json"
 
     val sc = new SparkContext("local", "LoadJsonWithSparkSQL", System.getenv("SPARK_HOME"))
