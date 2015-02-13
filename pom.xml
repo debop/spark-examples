@@ -375,6 +375,7 @@
                         <arg>-target:jvm-${jdk.version}</arg>
                         <arg>-unchecked</arg>
                         <arg>-deprecation</arg>
+                        <arg>-features</arg>
                         <arg>-explaintypes</arg>
                         <arg>-Dfile.encoding=UTF-8</arg>
                         <arg>-nowarn</arg>
@@ -517,6 +518,16 @@
                 <version>2.7</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <desciptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </desciptorRefs>
                 </configuration>
             </plugin>
 
