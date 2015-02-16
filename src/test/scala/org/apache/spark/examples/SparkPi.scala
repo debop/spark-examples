@@ -7,9 +7,7 @@ import scala.math.random
 
 class SparkPi extends AbstractSparkExample {
 
-  test("calc pi") {
-    val conf = new SparkConf().setAppName("Spark Pi").setMaster("local")
-    val sc = new SparkContext(conf)
+  sparkTest("calc pi") {
 
     val slices = 2
     val n = math.min(500000 * slices, Int.MaxValue).toInt
@@ -20,14 +18,9 @@ class SparkPi extends AbstractSparkExample {
     }.reduce(_ + _)
 
     println("Pi is roughly " + 4.0 * count / n.toDouble)
-
-    sc.stop()
   }
 
-  test("calc pi with Disk save") {
-    val conf = new SparkConf().setAppName("Spark Pi").setMaster("local")
-    val sc = new SparkContext(conf)
-
+  sparkTest("calc pi with Disk save") {
     val slices = 2
     val n = math.min(500000 * slices, Int.MaxValue).toInt
 
@@ -41,8 +34,6 @@ class SparkPi extends AbstractSparkExample {
     }.reduce(_ + _)
 
     println("Pi is roughly " + 4.0 * count / n.toDouble)
-
-    sc.stop()
   }
 
 }

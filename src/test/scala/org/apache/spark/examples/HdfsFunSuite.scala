@@ -5,10 +5,7 @@ import org.apache.spark.rdd.RDD
 
 class HdfsFunSuite extends AbstractSparkExample {
 
-  test("HDFS File") {
-    val conf = new SparkConf().setMaster("local").setAppName("Hdfs Test")
-    val sc = new SparkContext(conf)
-
+  sparkTest("HDFS File") {
     val file = sc.textFile("files/spam.txt")
     val mapped: RDD[Int] = file.map(s => s.length).cache()
 
@@ -20,7 +17,6 @@ class HdfsFunSuite extends AbstractSparkExample {
 
       println(s"Iteration $i took ${end-start} ms")
     }
-    sc.stop()
   }
 
 }

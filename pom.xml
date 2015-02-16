@@ -375,7 +375,6 @@
                         <arg>-target:jvm-${jdk.version}</arg>
                         <arg>-unchecked</arg>
                         <arg>-deprecation</arg>
-                        <arg>-features</arg>
                         <arg>-explaintypes</arg>
                         <arg>-Dfile.encoding=UTF-8</arg>
                         <arg>-nowarn</arg>
