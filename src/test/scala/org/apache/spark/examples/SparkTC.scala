@@ -11,10 +11,7 @@ import org.apache.spark.SparkContext._
  */
 class SparkTC extends AbstractSparkExample {
 
-  test("transitive closure") {
-    val conf = new SparkConf().setMaster("local").setAppName("SparkTC")
-    val sc = new SparkContext(conf)
-
+  sparkTest("transitive closure") {
     var tc = sc.parallelize(SparkTC.generateGraph).cache()
 
     // Linear transitive closure: each round grows paths by one edge,
@@ -39,7 +36,6 @@ class SparkTC extends AbstractSparkExample {
     } while(nextCount != oldCount)
 
     println(s"TC has ${tc.count()} edges.")
-    sc.stop()
   }
 
 }

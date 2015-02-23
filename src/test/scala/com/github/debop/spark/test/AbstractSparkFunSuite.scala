@@ -6,6 +6,8 @@ import org.apache.spark.SparkContext
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.{Matchers, FunSuite}
 
+import scala.util.Properties
+
 object SparkTest extends org.scalatest.Tag("com.github.debop.spark.test.SparkTest")
 
 /**
@@ -29,7 +31,7 @@ trait AbstractSparkFunSuite extends FunSuite with Matchers {
    */
   def sparkTest(name: String, silenceSpark: Boolean = true)(body: => Unit): Unit = {
     test(name, SparkTest) {
-      sc = new SparkContext("local[4]", name)
+      sc = new SparkContext(getMaster, name)
       try {
         body
       } finally {
@@ -38,6 +40,10 @@ trait AbstractSparkFunSuite extends FunSuite with Matchers {
         System.clearProperty("spark.master.port")
       }
     }
+  }
+
+  def getMaster: String = {
+    Properties.envOrElse("MASTER", "local")
   }
 }
 
