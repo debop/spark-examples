@@ -524,9 +524,9 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.5.3</version>
                 <configuration>
-                    <desciptorRefs>
+                    <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </desciptorRefs>
+                    </descriptorRefs>
                 </configuration>
             </plugin>
 
