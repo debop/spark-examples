@@ -5,15 +5,12 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
 
-class SparkPageRankFunSuite extends AbstractSparkExample {
+class SparkPageRank extends AbstractSparkExample {
 
-  test("page rank") {
+  sparkTest("page rank") {
 
     val input = "data/mllib/pagerank_data.txt"
-
-    val conf = new SparkConf().setMaster("local").setAppName("PageRank")
     val iters = 10
-    val sc = new SparkContext(conf)
 
     val lines = sc.textFile(input, 1)
     val links = lines.map { s =>
@@ -35,8 +32,6 @@ class SparkPageRankFunSuite extends AbstractSparkExample {
 
     val output: Array[(String, Double)] = ranks.collect()
     output.foreach(tup => println("Page " + tup._1 + " has ranks: " + tup._2))
-
-    sc.stop()
   }
 
 }

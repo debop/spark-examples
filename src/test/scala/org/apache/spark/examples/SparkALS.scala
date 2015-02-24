@@ -8,14 +8,11 @@ class SparkALS extends AbstractSparkExample {
 
   import org.apache.spark.examples.SparkALS._
 
-  test("Alternating least squares matrix factorization") {
+  sparkTest("Alternating least squares matrix factorization") {
     val slices = 8
     M = 100
     U = 500
     F = 10
-
-    val conf = new SparkConf().setMaster("local").setAppName("SparkALS")
-    val sc = new SparkContext(conf)
 
     val R = generateR()
 
@@ -51,10 +48,7 @@ class SparkALS extends AbstractSparkExample {
       prevRmse = newRmse
       iter += 1
     }
-
-    sc.stop()
   }
-
 }
 
 object SparkALS {

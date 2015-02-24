@@ -10,9 +10,7 @@ class SparkLR extends AbstractSparkExample {
 
   import SparkLR._
 
-  test("Spark Logistic regression based classification") {
-    val conf = new SparkConf().setMaster("local").setAppName("SparkLR")
-    val sc = new SparkContext(conf)
+  sparkTest("Spark Logistic regression based classification") {
 
     val points = sc.parallelize(generateData).cache()
 
@@ -28,8 +26,6 @@ class SparkLR extends AbstractSparkExample {
     }
 
     println(s"Final w: $w")
-
-    sc.stop()
   }
 }
 

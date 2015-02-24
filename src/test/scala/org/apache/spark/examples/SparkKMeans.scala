@@ -5,13 +5,12 @@ import org.apache.spark.SparkContext._
 import org.apache.spark._
 import org.apache.spark.rdd.RDD
 
-class SparkKMeansFunSuite extends AbstractSparkExample {
+class SparkKMeans extends AbstractSparkExample {
 
   import SparkKMeans._
 
-  test("K-Means clustering") {
-    val conf = new SparkConf().setMaster("local").setAppName("SparkKMeans")
-    val sc = new SparkContext(conf)
+  sparkTest("K-Means clustering") {
+
     val lines: RDD[String] = sc.textFile("data/mllib/kmeans_data.txt")
     val data: RDD[Vector[Double]] = lines.map(parseVector).cache()
     val K = 2
@@ -43,8 +42,6 @@ class SparkKMeansFunSuite extends AbstractSparkExample {
 
     println("Final centers:")
     kPoints.foreach(println)
-    sc.stop()
-
   }
 }
 
