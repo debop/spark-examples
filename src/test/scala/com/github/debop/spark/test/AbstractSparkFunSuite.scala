@@ -2,7 +2,7 @@ package com.github.debop.spark.test
 
 import akka.event.Logging
 import org.apache.log4j.{Level, Logger}
-import org.apache.spark.SparkContext
+import org.apache.spark.{SparkConf, SparkContext}
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.{Matchers, FunSuite}
 
@@ -31,7 +31,7 @@ trait AbstractSparkFunSuite extends FunSuite with Matchers {
    */
   def sparkTest(name: String, silenceSpark: Boolean = true)(body: => Unit): Unit = {
     test(name, SparkTest) {
-      sc = new SparkContext(getMaster, name)
+      sc = new SparkContext(newSparkConf(name))
       try {
         body
       } finally {
@@ -44,6 +44,10 @@ trait AbstractSparkFunSuite extends FunSuite with Matchers {
 
   def getMaster: String = {
     Properties.envOrElse("MASTER", "local")
+  }
+
+  def newSparkConf(appName: String): SparkConf = {
+    new SparkConf().setMaster(getMaster).setAppName(appName)
   }
 }
 

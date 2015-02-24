@@ -26,8 +26,6 @@ object MovieLensALS {
                      numProductBlocks: Int = -1,
                      implicitPrefs: Boolean = false) extends AbstractParams[Params]
 
-  val defaultParams = Params()
-
   /** Compute RMSE (Root Mean Squared Error). */
   def computeRmse(model: MatrixFactorizationModel, data: RDD[Rating], implicitPrefs: Boolean = false): Double = {
 
@@ -49,16 +47,24 @@ class MovieLensALS extends AbstractSparkExample {
 
   import org.apache.spark.examples.mllib.MovieLensALS._
 
-  test("movie lens ALS") {
+  sparkTest("movie lens ALS - implicitPrefs = false") {
+    run(Params())
+  }
+
+  sparkTest("movie lens ALS - implicitPrefs = true") {
+    run(Params(implicitPrefs = true))
+  }
+
+  def run(params: Params) {
 
     val conf = new SparkConf().setMaster("local").setAppName("MovieLensALS")
-    if (defaultParams.kryo) {
+    if (params.kryo) {
       conf.registerKryoClasses(Array(classOf[mutable.BitSet], classOf[Rating]))
     }
+    sc.stop()
+    sc = new SparkContext(conf)
 
-    val sc = new SparkContext(conf)
-
-    val implicitPrefs = defaultParams.implicitPrefs
+    val implicitPrefs = params.implicitPrefs
 
     val ratings: RDD[Rating] = sc.textFile(inputFile).map { line =>
       val fields = line.split("::")
@@ -103,28 +109,28 @@ class MovieLensALS extends AbstractSparkExample {
         splits(1).map(x => Rating(x.user, x.product, if (x.rating > 0) 1.0 else 0.0))
       } else {
                splits(1)
-             }.cache()
+                   }
+             .cache()
 
     val numTraining = training.count()
     val numTest = test.count()
     println(s"Training: $numTraining, test: $numTest")
 
     val model: MatrixFactorizationModel = new ALS()
-                                          .setRank(defaultParams.rank)
-                                          .setIterations(defaultParams.numIterations)
-                                          .setLambda(defaultParams.lambda)
-                                          .setImplicitPrefs(defaultParams.implicitPrefs)
-                                          .setUserBlocks(defaultParams.numUserBlocks)
-                                          .setProductBlocks(defaultParams.numProductBlocks)
+                                          .setRank(params.rank)
+                                          .setIterations(params.numIterations)
+                                          .setLambda(params.lambda)
+                                          .setImplicitPrefs(params.implicitPrefs)
+                                          .setUserBlocks(params.numUserBlocks)
+                                          .setProductBlocks(params.numProductBlocks)
                                           .run(ratings)
 
     ratings.unpersist(blocking = false)
 
-    val rmse = computeRmse(model, test, defaultParams.implicitPrefs)
+    val rmse = computeRmse(model, test, params.implicitPrefs)
 
     println(s"Test RMSE = $rmse")
 
-    sc.stop()
   }
 
 
