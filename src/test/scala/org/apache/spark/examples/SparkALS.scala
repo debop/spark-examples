@@ -1,7 +1,9 @@
 package org.apache.spark.examples
 
 import org.apache.commons.math3.linear._
-import org.apache.spark._
+import org.apache.spark.SparkContext._
+import org.apache.spark.mllib.recommendation.{ALS, MatrixFactorizationModel, Rating}
+import org.apache.spark.rdd.RDD
 
 
 class SparkALS extends AbstractSparkExample {
@@ -48,6 +50,39 @@ class SparkALS extends AbstractSparkExample {
       prevRmse = newRmse
       iter += 1
     }
+  }
+
+  sparkTest("recommendation test") {
+    val data = sc.textFile("data/mllib/als/test.data")
+    val ratings: RDD[Rating] = data.map(_.split(',') match {
+      case Array(user, item, rate) => Rating(user.toInt, item.toInt, rate.toDouble)
+    })
+
+    // Build the recommendation model using ALS
+    val rank = 10
+    val numIterations = 20
+    val model: MatrixFactorizationModel = ALS.train(ratings, rank, numIterations, 0.01)
+
+    // Evaluate the model on rating data
+    val usersProducts: RDD[(Int, Int)] = ratings.map {
+      case Rating(user, product, rate) => (user, product)
+    }
+    val predictions = model.predict(usersProducts).map {
+      case Rating(user, product, rate) =>
+        println(s"Prodiction\tuser=$user, product=$product, rate=$rate")
+        ((user, product), rate)
+    }
+    val ratesAndPreds = ratings.map {
+      case Rating(user, product, rate) => ((user, product), rate)
+    }.join(predictions)
+
+    val MSE = ratesAndPreds.map {
+      case ((user, product), (r1, r2)) =>
+        val err = r1 - r2
+        err * err
+    }.mean()
+
+    println(s"Mean squared error= $MSE")
   }
 }
 
