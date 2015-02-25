@@ -21,3 +21,15 @@ project/plugins/project/
 # Hadoop output
 .output/
 ._temporary/
+files/load/output/._SUCCESS.crc
+files/load/output/.part-00000.crc
+files/load/output/_SUCCESS
+files/load/output/part-00000
+pair.parquet/._common_metadata.crc
+pair.parquet/._metadata.crc
+pair.parquet/._SUCCESS.crc
+pair.parquet/.part-r-1.parquet.crc
+pair.parquet/_common_metadata
+pair.parquet/_metadata
+pair.parquet/_SUCCESS
+pair.parquet/part-r-1.parquet
