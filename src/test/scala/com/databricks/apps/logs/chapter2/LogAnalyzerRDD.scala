@@ -11,6 +11,7 @@ import org.apache.spark.sql.SQLContext
 class LogAnalyzerRDD(val sqlContext: SQLContext) {
 
   def processRdd(accessLogs: RDD[ApacheAccessLog]): LogStatistics = {
-
+    val contentSizeStats = SizeStats(0, 0, 0, 0)
+    LogStatistics(contentSizeStats, null, null, null)
   }
 }
