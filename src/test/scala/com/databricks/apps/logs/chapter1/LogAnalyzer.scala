@@ -3,8 +3,8 @@ package com.databricks.apps.logs.chapter1
 import com.databricks.apps.logs.{ApacheAccessLog, OrderingUtils}
 import org.apache.spark.SparkContext._
 import org.apache.spark.examples.AbstractSparkExample
+import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SQLContext
-import org.apache.spark.streaming.{Duration, StreamingContext}
 
 /**
  * The LogAnalyzer takes in an apache access log file and
@@ -60,36 +60,55 @@ class LogAnalyzer extends AbstractSparkExample {
     val sqlContext = new SQLContext(sc)
     import sqlContext._
 
-    val accessLogs = sc.textFile(logFile).map(ApacheAccessLog.parseLogLine).cache()
+    val accessLogs: RDD[ApacheAccessLog] = sc.textFile(logFile).map(ApacheAccessLog.parseLogLine).cache()
     val accessTableName = "webLogs"
     accessLogs.registerTempTable(accessTableName)
 
     // Calculate statistics based on the content size.
-    val contentSizeStats = sql(s"SELECT SUM(contentSize), COUNT(*), MIN(contentSize), MAX(contentSize) FROM $accessTableName")
-                           .first()
-    val sum = contentSizeStats.getLong(0)
-    val count = contentSizeStats.getLong(1)
-    val min = contentSizeStats.getLong(2)
-    val max = contentSizeStats.getLong(3)
+    val (sum, count, min, max) =
+      sql(
+           s"""SELECT SUM(contentSize), COUNT(*), MIN(contentSize), MAX(contentSize)
+              |FROM $accessTableName
+               |""".stripMargin)
+      .map(row => (row.getLong(0), row.getLong(1), row.getLong(2), row.getLong(3)))
+      .first()
+
     println(s"Content Size Avg: ${sum / count}, Min: $min, Max: $max")
 
     // Compute Response Code to Count.
-    val responseCodeToCount = sql(s"SELECT responseCode, COUNT(*) FROM $accessTableName GROUP BY responseCode ORDER BY responseCode LIMIT 1000")
-                              .map(row => (row.getInt(0), row.getLong(1)))
-                              .collect()
+    val responseCodeToCount: Array[(Int, Long)] =
+      sql( s"""SELECT responseCode, COUNT(*) FROM
+              |$accessTableName
+               |GROUP BY responseCode
+               |ORDER BY responseCode
+               |LIMIT 1000""".stripMargin)
+      .map(row => (row.getInt(0), row.getLong(1)))
+      .collect()
 
     println(s"Response code counts: ${responseCodeToCount.mkString("[", ",", "]")}")
 
     // Any IPAddress that has accessed the server more than 10 times.
-    val ipAddresses = sql(s"SELECT ipAddress, COUNT(*) as total FROM $accessTableName GROUP BY ipAddress HAVING total > 10 LIMIT 1000")
-                      .map(row => row.getString(0))
-                      .collect()
+    val ipAddresses: Array[String] =
+      sql(
+           s"""SELECT ipAddress, COUNT(*) as total
+              |FROM $accessTableName
+               |GROUP BY ipAddress
+               |HAVING total > 10
+               |LIMIT 1000""".stripMargin)
+      .map(row => row.getString(0))
+      .collect()
 
     println(s"IPAddresses > 10 times: ${ipAddresses.mkString("[", ",", "]")}")
 
-    val topEndpoints = sql(s"SELECT endpoint, COUNT(*) as total FROM $accessTableName GROUP BY endpoint ORDER BY total DESC LIMIT 10")
-                       .map(row => (row.getString(0), row.getLong(1)))
-                       .collect()
+    val topEndpoints =
+      sql(
+           s"""SELECT endpoint, COUNT(*) as total
+              |FROM $accessTableName
+               |GROUP BY endpoint
+               |ORDER BY total DESC
+               |LIMIT 10""".stripMargin)
+      .map(row => (row.getString(0), row.getLong(1)))
+      .collect()
 
     println(s"Top Endpoints: ${topEndpoints.mkString("[", ",", "]")}")
   }
