@@ -68,7 +68,7 @@ class MongoRecommender extends AbstractSparkExample {
     println(s"usersMovies = ${usersMovies.count()}")
 
     // create the model from existing ratings data
-    val model: MatrixFactorizationModel = ALS.train(ratingsData, 10, 10, 0.01)
+    val model: MatrixFactorizationModel = ALS.train(ratingsData, 5, 10, 0.01)
 
     val predictions: RDD[Rating] = model.predict(usersMovies)
 
