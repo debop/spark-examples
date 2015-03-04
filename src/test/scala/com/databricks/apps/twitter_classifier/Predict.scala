@@ -16,7 +16,8 @@ class Predict extends AbstractSparkExample {
 
   sparkTest("twitter predict") {
 
-    val Array(modelFile, Utils.IntParam(clusterNumber)) = Utils.parseCommandLineWithTwitterCredentials(args)
+    val modelFile = "data/model/tweeter"
+    val clusterNumber = 3
 
     println("Initialize Streaming Spark Context...")
     val ssc = new StreamingContext(sc, Seconds(5))

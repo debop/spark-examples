@@ -2,7 +2,6 @@ package org.apache.spark.examples
 
 import org.apache.spark.SparkContext._
 import org.apache.spark.rdd.RDD
-import org.apache.spark.{SparkConf, SparkContext}
 
 
 class SparkPageRank extends AbstractSparkExample {
@@ -12,8 +11,8 @@ class SparkPageRank extends AbstractSparkExample {
     val input = "data/mllib/pagerank_data.txt"
     val iters = 10
 
-    val lines = sc.textFile(input, 1)
-    val links = lines.map { s =>
+    val lines: RDD[String] = sc.textFile(input, 1)
+    val links: RDD[(String, Iterable[String])] = lines.map { s =>
       val parts = s.split("\\s+")
       (parts(0), parts(1))
     }.distinct().groupByKey().cache()
