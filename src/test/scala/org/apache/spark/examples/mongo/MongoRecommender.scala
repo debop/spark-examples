@@ -67,10 +67,13 @@ class MongoRecommender extends AbstractSparkExample {
 
     println(s"usersMovies = ${usersMovies.count()}")
 
-    // create the model from existing ratings data
-    val model: MatrixFactorizationModel = ALS.train(ratingsData, 5, 10, 0.01)
 
-    val predictions: RDD[Rating] = model.predict(usersMovies)
+    println(s"train and calc predictions...")
+
+    // create the model from existing ratings data
+    val model: MatrixFactorizationModel = ALS.train(ratingsData, 5, 5, 0.01)
+
+    val predictions: RDD[Rating] = model.predict(usersMovies).filter(r => r.rating > 4.5).cache()
 
     val predictionsOutput: RDD[(Null, BasicBSONObject)] = predictions.map { rating =>
       val doc = new BasicBSONObject()
@@ -80,12 +83,13 @@ class MongoRecommender extends AbstractSparkExample {
       doc.put("timestamp", new Date())
 
       (null, doc)
-    }
+    }.cache()
 
     println(s"writing ${predictionsOutput.count()} documents to $mongodbUri")
 
     val predictionsConfig = new org.apache.hadoop.conf.Configuration()
     predictionsConfig.set("mongo.output.uri", mongodbUri)
+
 
     predictionsOutput.saveAsNewAPIHadoopFile("file:///notapplicable",
                                               classOf[Any],

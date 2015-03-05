@@ -1,10 +1,8 @@
 package com.github.debop.spark.test
 
-import akka.event.Logging
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.{SparkConf, SparkContext}
-import org.scalatest.matchers.ShouldMatchers
-import org.scalatest.{Matchers, FunSuite}
+import org.scalatest.{FunSuite, Matchers}
 
 import scala.util.Properties
 
@@ -42,13 +40,14 @@ trait AbstractSparkFunSuite extends FunSuite with Matchers {
     }
   }
 
-  def getMaster: String = {
+  def getMaster: String =
     Properties.envOrElse("MASTER", "local")
-  }
 
-  def newSparkConf(appName: String): SparkConf = {
-    new SparkConf().setMaster(getMaster).setAppName(appName)
-  }
+  def newSparkConf(appName: String): SparkConf =
+    new SparkConf()
+    .setMaster(getMaster)
+    .setAppName(appName)
+    .set("spark.executor.memory", "4g")
 }
 
 object SparkUtil {
