@@ -1,18 +1,14 @@
 package fastdataprocessing.pandaspark.examples
 
 import java.io.StringReader
-import java.lang.Iterable
-import java.util
 
 import au.com.bytecode.opencsv.CSVReader
 import org.apache.spark.Accumulator
-import org.apache.spark.api.java.function.FlatMapFunction
-import org.apache.spark.examples.AbstractSparkExample
+import org.apache.spark.SparkContext._
 import org.apache.spark.rdd.RDD
 
 import scala.collection.mutable
 import scala.util.control.NonFatal
-import org.apache.spark.SparkContext._
 
 
 object JavaLoadCsvMoreTestable {
