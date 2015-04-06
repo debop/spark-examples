@@ -7,7 +7,11 @@ import org.apache.spark.rdd.RDD
 import org.bson.{BSONObject, BasicBSONObject}
 
 /**
- * MongoDB의 정보를 가지고
+ * MongoDB에 있는 beowulf.input 정보를 읽어, 단어 빈도수를 계산하여 beowulf.output 에 저장합니다.
+ * 먼저 mongodb에 data/mongo/beowulf.input 에 정보를 입력해야 합니다.
+ *
+ * $ mongoimport -d beowulf -c input beowulf.json
+ *
  * @author sunghyouk.bae@gmail.com at 15. 3. 4.
  */
 class MongoWordCount extends AbstractSparkExample {

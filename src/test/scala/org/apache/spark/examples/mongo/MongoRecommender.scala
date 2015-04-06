@@ -33,7 +33,6 @@ class MongoRecommender extends AbstractSparkExample {
 
     val ratingsData: RDD[Rating] = sc.textFile(ratingsUri).map { line: String =>
       // UserId::MovieId::Rating::Timestamp
-      println(s"ratings = $line")
       val elems = line.split("::")
       val userId = elems(0).toInt
       val movieId = elems(1).toInt
